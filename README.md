@@ -6,20 +6,27 @@
  - requests
  - pycrypto
  - pywin32
+ 
 requests 安装方法 ` pip install requests`
+
 pycrypto [下载地址][1]
+
 pywin32 [下载地址][2]
 
 ##用于其他学校
 如果学校支持web登录认证，都可以基于本项目修改
  1. 修改loginLogoutUtil.py里面的登录注销方法，使用requests模拟登录，请自行测试。
  2. 更换图片（请保持图片大小一致，至少宽度应该一样，否则界面布局会错乱），修改button颜色。
+ 
 tips:Windows icon需要多尺寸合成，否则某些情况下，会无法显示。
 
 ##打包成exe？
 如果你需要兼容Windows 7以后版本，请在Windows 7 32bit 下打包。
+
 打包需要安装Pyinstaller模块。pyinstaller [下载地址][3]，建议使用3.1.1版本，解压缩，进入目录，使用命令`python setup.py install`即可安装。打包时注意文件的路径。
+
 tips:使用批处理会更加方便。
+
 进入项目目录，打开命令提示符窗口，输入以下命令。
 
     pyinstaller --upx-dir=upxdir -F -w --hidden-import=queue -i resources\favicon.ico profcom.py
