@@ -1,0 +1,6 @@
+*.spec
+*.pyc
+*.bat
+*.txt
+test
+test/*
