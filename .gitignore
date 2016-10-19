@@ -2,5 +2,9 @@
 *.pyc
 *.bat
 *.txt
+dist
+dist/*
+build
+build/*
 test
 test/*

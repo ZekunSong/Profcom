@@ -4,7 +4,7 @@
 import os
 
 author = 'Neal'
-author_mail = '980510480@qq.com'
+author_mail = ''
 version = '1.4.0'
 app_name = 'Profcom'
 
