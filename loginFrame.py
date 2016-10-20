@@ -6,7 +6,7 @@
 
 # 登录窗体
 
-from mtTkinter import *
+
 import ttk
 import tkFont
 import tkMessageBox
@@ -19,6 +19,8 @@ from loginLogoutUtil import *
 from logger import *
 from logoutFrame import *
 import fileinit
+
+from mtTkinter import *
 
 logger = Logger(fileinit.logfile, __name__).getlogger()
 
@@ -45,12 +47,12 @@ class LoginFrame(Frame):
         master['menu'] = menubar
 
         '''
-        self.userData=(
+        self.users_data=(
             ["100000","123456"],
             ["100001","123456"])
         '''
         # 初始化用户列表
-        self.userData = self.get_all_users()
+        self.users_data = self.get_all_users()
         self.create_widgets()
         self.set_frame_configuration()
         self.handle_aoto_login()
@@ -84,7 +86,7 @@ class LoginFrame(Frame):
                            padx=(0, 5), pady=(20, 0), ipady=1)
 
         # 下拉输入
-        ID = [user[0] for user in self.userData]
+        ID = [user[0] for user in self.users_data]
         self.campusCardID = ttk.Combobox(
             self.main_frame, textvariable=self.idrem, values=ID, width=25, font=ift)
         self.campusCardID.bind('<<ComboboxSelected>>', self.combobox_handler)
@@ -185,13 +187,13 @@ class LoginFrame(Frame):
     def combobox_handler(self, event=None):
         current = self.campusCardID.current()
         self.campusCardPW.delete(0, END)
-        self.campusCardPW.insert(END, self.userData[current][1])
+        self.campusCardPW.insert(END, self.users_data[current][1])
 
     def handle_pw_show(self):
         if len(self.campusCardID.get()) != 6:
             self.campusCardPW.delete(0, END)
         else:
-            for user in self.userData:
+            for user in self.users_data:
                 if self.campusCardID.get() == user[0] and len(self.campusCardPW.get()) == 0:
                     self.campusCardPW.insert(END, user[1])
         self.after(100, self.handle_pw_show)
@@ -221,7 +223,7 @@ class LoginFrame(Frame):
             self.remCheck.set(1)
 
     def del_user_info(self, event=None):
-        if self.userData != () and tkMessageBox.askokcancel("删除账号信息", "删除该账号信息？", parent=self, default="cancel"):
+        if self.users_data != () and tkMessageBox.askokcancel("删除账号信息", "删除该账号信息？", parent=self, default="cancel"):
             self.del_data()
 
     def del_data(self, event=None):
@@ -232,8 +234,8 @@ class LoginFrame(Frame):
             os.remove(file)
 
         # 生成新的用户列表并显示
-        self.userData = self.get_all_users()
-        ID = [user[0] for user in self.userData]
+        self.users_data = self.get_all_users()
+        ID = [user[0] for user in self.users_data]
         self.campusCardID["values"] = ID
         if len(ID) > 0:
             self.idrem.set(ID[0])
@@ -243,7 +245,7 @@ class LoginFrame(Frame):
 
     def get_all_users(self):
         filenames = os.listdir(fileinit.users_info_dir)
-        AllUsers = []
+        all_users = []
         for item in filenames:
             user = ["userID", "userPW"]
             item = os.path.join(fileinit.users_info_dir, item)
@@ -260,11 +262,11 @@ class LoginFrame(Frame):
                             PW = ''
                         user[0] = userID
                         user[1] = PW
-                        AllUsers.append(user)
+                        all_users.append(user)
                 except Exception, e:
                     logger.error('open userfile failed', exc_info=True)
-        AllUsers = tuple(AllUsers)
-        return AllUsers
+        all_users = tuple(all_users)
+        return all_users
 
     def set_frame_configuration(self):
         setAutocheck = 1
@@ -354,8 +356,8 @@ class LoginFrame(Frame):
         try:
             msg = self.queue.get(0)
             # show result of the task if needed
-            responseCode = msg
-            if responseCode == 1:
+            response_code = msg
+            if response_code == 1:
                 self.prog_bar.stop()
                 self.prog_bar.pack_forget()
                 self.login_button['state'] = 'normal'
@@ -423,7 +425,7 @@ class LoginFrame(Frame):
                 systrayThread = SysTrayTread(self)
                 systrayThread.start()
 
-            elif responseCode == 0:
+            elif response_code == 0:
                 # 登录页，页面不变化
                 self.prog_bar.stop()
                 self.prog_bar.pack_forget()

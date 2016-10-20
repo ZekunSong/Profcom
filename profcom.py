@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # 入口
 
-from mtTkinter import *
-from loginFrame import *
-import fileinit
 
-if __name__ == '__main__':
+from loginFrame import *
+from Tkinter import *
+
+
+def main():
     root = Tk()
     root.title("Profcom")
     curWidth = 400
@@ -17,3 +18,6 @@ if __name__ == '__main__':
     root.resizable(width=False, height=False)  # 不可变
     app = LoginFrame(root)
     root.mainloop()
+
+if __name__ == '__main__':
+    main()

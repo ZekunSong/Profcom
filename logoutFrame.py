@@ -6,7 +6,7 @@
 
 # 登录成功信息窗体
 
-from mtTkinter import *
+
 import tkMessageBox
 import tkFont
 import os
@@ -23,6 +23,8 @@ from logger import *
 from loginFrame import *
 import systray
 import fileinit
+
+from mtTkinter import *
 
 logger = Logger(fileinit.logfile, __name__).getlogger()
 

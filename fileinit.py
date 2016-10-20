@@ -11,7 +11,7 @@ app_name = 'Profcom'
 
 # os.environ.get('ALLUSERSPROFILE')
 all_users_profile = os.getenv('ALLUSERSPROFILE')
-userProfile = os.getenv('LOCALAPPDATA')
+user_profile = os.getenv('LOCALAPPDATA')
 
 # 创建目录
 all_users_profile_profcom = all_users_profile + '\\' + app_name
@@ -23,7 +23,7 @@ with open(logfile, "a")as f:
     pass
 
 # 创建目录
-user_profile_profcom = userProfile + '\\' + app_name
+user_profile_profcom = user_profile + '\\' + app_name
 if not os.path.exists(user_profile_profcom):
     os.makedirs(user_profile_profcom)
 
