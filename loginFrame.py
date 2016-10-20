@@ -5,8 +5,6 @@
 #       限制输入         http://blog.chinaunix.net/uid-10619456-id-3466149.html
 
 # 登录窗体
-
-
 import ttk
 import tkFont
 import tkMessageBox
@@ -19,7 +17,6 @@ from loginLogoutUtil import *
 from logger import *
 from logoutFrame import *
 import fileinit
-
 from mtTkinter import *
 
 logger = Logger(fileinit.logfile, __name__).getlogger()

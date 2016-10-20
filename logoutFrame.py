@@ -5,8 +5,6 @@
 #       限制输入         http://blog.chinaunix.net/uid-10619456-id-3466149.html
 
 # 登录成功信息窗体
-
-
 import tkMessageBox
 import tkFont
 import os
@@ -23,7 +21,6 @@ from logger import *
 from loginFrame import *
 import systray
 import fileinit
-
 from mtTkinter import *
 
 logger = Logger(fileinit.logfile, __name__).getlogger()
@@ -72,7 +69,8 @@ class LogoutFrame(Toplevel):
 
         ft = tkFont.Font(family='Microsoft YaHei UI Light', size=10)
         self.success_info_text = Label(self.main_frame, text="", font=ft)
-        self.success_info_text.grid(row=1, column=2, columnspan=4, pady=(25, 10))
+        self.success_info_text.grid(
+            row=1, column=2, columnspan=4, pady=(25, 10))
         self.address_show_text = Label(self.main_frame, text="", font=ft)
         self.address_show_text.grid(row=2, column=1, columnspan=6, pady=10)
         self.logout_button = Button(self.main_frame, text="注销", font=ft, command=self.logout_btn_click,
@@ -143,7 +141,8 @@ class LogoutFrame(Toplevel):
                 self.prog_bar.stop()
                 self.prog_bar.pack_forget()
                 self.logout_button['state'] = 'normal'
-                tkMessageBox.showinfo("注销", "注销失败                   \n\n\n", parent=self)
+                tkMessageBox.showinfo(
+                    "注销", "注销失败                   \n\n\n", parent=self)
         except Queue.Empty:
             self.after(100, self.process_queue)
 
@@ -180,7 +179,8 @@ class LogoutFrame(Toplevel):
             if responseCode == 1:
                 self.loginFrame.parent.quit()
             elif responseCode == -1:
-                tkMessageBox.showinfo("退出", "注销失败，已退出            \n\n\n", parent=self)
+                tkMessageBox.showinfo(
+                    "退出", "注销失败，已退出            \n\n\n", parent=self)
                 self.loginFrame.parent.quit()
         except Queue.Empty:
             self.after(100, self.process_systray_queue)
